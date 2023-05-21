@@ -20,56 +20,6 @@ class kongaPhoneSpyder(scrapy.Spider):
     name = "kongaphone"
     page_num = 1
 
-    custom_settings = {
-        "BOT_NAME": "web crawler bot",
-   
-        # Crawl responsibly by identifying yourself (and your website) on the user-agent
-        "USER_AGENT": (
-            "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36",
-        ),
-        # Obey robots.txt rules
-        "ROBOTSTXT_OBEY": False,
-        # Splash Server Endpoint
-        "SPLASH_URL": "http://3.142.211.239:8050/",
-        # Set settings whose default value is deprecated to a future-proof value
-        "REQUEST_FINGERPRINTER_IMPLEMENTATION": "2.7",
-        "TWISTED_REACTOR": "twisted.internet.asyncioreactor.AsyncioSelectorReactor",
-        "FEED_EXPORT_ENCODING ": "utf-8",
-        # Enable or disable downloader middlewares
-        # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
-        "DOWNLOADER_MIDDLEWARES": {
-            # "jumia.middlewares.JumiaDownloaderMiddleware": 543,
-            "scrapeops_scrapy.middleware.retry.RetryMiddleware": 550,
-            "scrapy.downloadermiddlewares.retry.RetryMiddleware": None,
-            "scrapy_splash.SplashCookiesMiddleware": 723,
-            "scrapy_splash.SplashMiddleware": 725,
-            "scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware": 810,
-        },
-        # Enable or disable spider middlewares
-        # See https://docs.scrapy.org/en/latest/topics/spider-middleware.html
-        "SPIDER_MIDDLEWARES": {
-            "scrapy_splash.SplashDeduplicateArgsMiddleware": 100,
-            # "jumia.middlewares.JumiaSpiderMiddleware": 543,
-        },
-        # Define the Splash DupeFilter
-        "DUPEFILTER_CLASS ": "scrapy_splash.SplashAwareDupeFilter",
-        "HTTPCACHE_STORAGE ": "scrapy_splash.SplashAwareFSCacheStorage",
-        # Configure item pipelines
-        # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-        "ITEM_PIPELINES ": {
-             #"scrapy_jumia.pipelines.Remove_Items_withNoDiscount_Pipeline": 100,
-             #"scrapy_jumia.pipelines.Remove_Items_NotinStock_Pipeline": 150,
-            "scrapy_jumia.pipelines.Remove_Duplicate_item_Pipeline": 200,
-             "scrapy_jumia.pipelines.SavingToDbpostgres": 250,
-        },
-        "SCRAPEOPS_API_KEY": "c0f1d288-cbe4-464c-9e22-59881bd08841",
-        # Enable or disable extensions
-        # See https://docs.scrapy.org/en/latest/topics/extensions.html
-        "EXTENSIONS ": {
-            #    "scrapy.extensions.telnet.TelnetConsole": None,
-            #'scrapeops_scrapy.extension.ScrapeOpsMonitor': 500,
-        },
-    }
 
     def start_requests(self):
         url = "https://www.konga.com/category/phones-tablets-5294?konga_fulfilment_type=CWK"
