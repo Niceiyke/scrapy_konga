@@ -3,3 +3,4 @@ scrapeops-scrapy
 psycopg2-binary
 scrapy-splash
 scrapyd
+python-dotenv
